@@ -1,6 +1,18 @@
 
 
-function Footer() {
+function Footer(props) {
+  if (!props.items.length)
+  return (
+      <p className="stats">
+          <em>Start adding some items to your packing list 🚀</em>
+      </p>
+  );
+
+const numItems = props.items.length;
+const numPacked = props.items.filter((item) => item.packed).length;
+const percentage = Math.round((numPacked / numItems) * 100);
+
+
     return (
         <div>
             <div className="container-fluid  bg-dark">
@@ -12,6 +24,11 @@ function Footer() {
       <p>E-mail: rayhanbabu458@gmail.com</p>
     </div>
     <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12 p-2 ">
+               <em>
+                {percentage === 100
+                    ? "You got everything! Ready to go ✈️"
+                    : ` 💼 You have ${numItems} items on your list, and you already packed ${numPacked} (${percentage}%)`}
+              </em>
       <img
         src="https://placehold.co/200"
         className="rounded mx-auto d-block"
@@ -43,6 +60,8 @@ function Footer() {
     </div>
   </div>
 </div>
+
+
 
         </div>
     )
